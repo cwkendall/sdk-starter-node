@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello App! - Notify Quickstart</title>
+  <title>Notify Quickstart</title>
   <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="notify.css">
 </head>
 <body>
+
+  <section>
+    <h1>Welcome to Notify!</h1>
+    <p>After you set up a notification binding, go ahead and send a notification!</p>
+
+    <input type="text" id="identityInput" placeholder="Identity" size="30"/>
+    <input type="text" id="segmentInput" placeholder="Segments" size="30"/>
+    <input type="text" id="tagInput" placeholder="Tags" size="30"/>
+    <p/>
+    <input type="text" id="titleInput" placeholder="Title (optional)" size="45"/>
+    <p/>
+    <textarea id="bodyText" placeholder="Body..." cols="45"></textarea>
+    <p/>
+    <input type="submit" id="sendNotificationButton" value="Send Notification"/>
+
+  </section>
+  <textarea id="history" placeholder="Messages sent will appear here"></textarea>
+  <table id="users">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
   <header>
     <a href="https://www.twilio.com/docs/api/notifications" target="_blank">
       Read the Twilio Notify guide<i class="fa fa-fw fa-external-link"></i>
     </a>
   </header>
-
-  <section>
-    <h1>Send Notification to Identity</h1>
-
-    <input type="text" id="identityInput" placeholder="Identity" size="30"/>
-    <p/>
-    <input type="submit" id="sendNotificationButton" value="Send Notification"/>
-
-    <div id="message">Welcome to Notify!</div>
-
-    <p>After you set up a notification binding, go ahead and send a notification to that identity!</p>
-  </section>
-
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="notify.js"></script>
 </body>

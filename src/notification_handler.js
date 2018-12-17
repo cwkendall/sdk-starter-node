@@ -34,6 +34,43 @@ exports.registerBind = function registerBind(binding) {
   });
 };
 
+exports.getBindings = function getBindings(opts) {
+  const service = getTwilioClient();
+
+  return service.bindings.list(opts).then((list) => {
+    const table = {
+      'fields': [
+        'Identity',
+        'Binding Type',
+        'Date Created',
+        'Date Updated',
+        'Tags'],
+      'bindings': list.map((val) => {
+        return [
+          val.identity,
+          val.bindingType,
+          val.dateCreated,
+          val.dateUpdated,
+          val.tags];
+      })}
+    table.bindings.sort();
+    // console.log(JSON.stringify(table));
+    return {
+      status: 200,
+      data: table
+    }
+  }).catch((error) => {
+    console.log(error);
+    return {
+      status: 500,
+      data: {
+        error: error,
+        message: 'Failed to fetch bindings: ' + error,
+      },
+    };
+  })
+}
+
 // Notify - send a notification from a POST HTTP request
 exports.sendNotification = function sendNotification(notification) {
   // Create a reference to the user notification service

@@ -14,9 +14,7 @@ html, body {
 
 header {
   width:100%;
-  position:absolute;
   text-align:center;
-  bottom:20px;
 }
 
 header a, header a:visited {
@@ -37,4 +35,20 @@ section {
 
 #message {
   padding:6px;
+}
+
+#history {
+  width: 16%;
+  padding: 1em;
+  position: relative;
+  min-height: 400px;
+  overflow-y: scroll;
+  float:left;
+}
+
+#users {
+  border: 1px solid #dedede;
+  margin: 2%;
+  width: 80%;
+  float: left;
 }
