@@ -4,7 +4,7 @@
   "description": "Starter Server Application for Node.js",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "NODE_ENV=test && jest"
   },
   "repository": {
@@ -33,6 +33,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^8.0.0",
     "jest": "^23.6.0",
-    "jsonwebtoken": "^8.3.0"
+    "jsonwebtoken": "^8.3.0",
+    "nodemon": "^1.18.9"
   }
 }

@@ -34,12 +34,47 @@ exports.registerBind = function registerBind(binding) {
   });
 };
 
+exports.clearBindings = function clearBindings() {
+  const service = getTwilioClient();
+  const promises = [];
+  return service.bindings.list().then((bindings) => {
+    for (const binding of bindings) {
+      promises.push(service.bindings(binding.sid).remove());
+    }
+    Promise.all(promises).then((result) => {
+      return {
+        status: 200,
+        data: {message: 'Bindings deleted!'},
+      }
+    }).catch((error) => {
+      console.log(error);
+      return {
+        status: 500,
+        data: {
+          error: error,
+          message: 'Failed to delete bindings: ' + error,
+        },
+      };
+    });
+  }).catch((error) => {
+    console.log(error);
+    return {
+      status: 500,
+      data: {
+        error: error,
+        message: 'Unable to fetch bindings for deletion: ' + error,
+      },
+    };
+  })
+}
+
 exports.getBindings = function getBindings(opts) {
   const service = getTwilioClient();
 
   return service.bindings.list(opts).then((list) => {
     const table = {
       'fields': [
+        'Address',
         'Identity',
         'Binding Type',
         'Date Created',
@@ -47,6 +82,7 @@ exports.getBindings = function getBindings(opts) {
         'Tags'],
       'bindings': list.map((val) => {
         return [
+          val.address,
           val.identity,
           val.bindingType,
           val.dateCreated,

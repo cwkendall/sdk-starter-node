@@ -21,7 +21,13 @@
     <textarea id="bodyText" placeholder="Body..." cols="45"></textarea>
     <p/>
     <input type="submit" id="sendNotificationButton" value="Send Notification"/>
-
+    <div>
+      <p>Binding Setup</p>
+      <input type="button" id="clearBindingsButton" value="Clear All Bindings"/>
+      <input type="button" id="addBindingsButton" value="Bulk Add Bindings"/>
+      <p/>
+      <textarea id="bindingsList" placeholder="Bulk bindings, one per line (append any tags as CSV)" cols="45" rows="5"></textarea>
+    </div>
   </section>
   <textarea id="history" placeholder="Messages sent will appear here"></textarea>
   <table id="users">

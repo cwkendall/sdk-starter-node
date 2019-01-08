@@ -35,6 +35,11 @@ $(function() {
     $container.append($user).append($message);
     $chatWindow.append($container);
     $chatWindow.scrollTop($chatWindow[0].scrollHeight);
+
+    if(fromUser === username || document.hasFocus()){
+      generalChannel.setAllMessagesConsumed();
+    }
+    // todo move avatar for message user
   }
 
   // Alert the user they have been assigned a random username
@@ -97,8 +102,25 @@ $(function() {
     // Listen for new messages sent to the channel
     generalChannel.on('messageAdded', function(message) {
       printMessage(message.author, message.body);
+
+    });
+
+    generalChannel.on('memberJoined', function(member) {
+      print('[memberJoined]: ' + JSON.stringify(member.identity), false);
+    });
+
+    generalChannel.on('memberUpdated', function(member) {
+      //setAvatarPosition(member)
+      if(member.identity !== username && member.lastConsumptionTimestamp > (new Date().getTime() - 10000)){
+        print('[messageRead]: ' + member.identity + '@' + member.lastConsumedMessageIndex, false);
+      }
     });
   }
+
+
+  $(window).on("focus click", function() {
+  	generalChannel.setAllMessagesConsumed();
+  });
 
   // Send a new message to the general channel
   var $input = $('#chat-input');

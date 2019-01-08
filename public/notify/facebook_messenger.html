@@ -9,47 +9,45 @@
       function uuidv4() {
         return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
           (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4)
-              .toString(16))
+            .toString(16))
       }
-
-      console.log(uuidv4());
       window.fbAsyncInit = function() {
         FB.init({
-          appId: '394027734355898',
+          appId: "394027734355898",
           xfbml: true,
           cookie: true,
           autoLogAppEvents: true,
-          version: 'v3.2',
+          version: "v3.2",
         });
 
-        FB.Event.subscribe('send_to_messenger', function(e) {
-          console.log('Plug-in reported event: ' + e.event);
+        FB.Event.subscribe("send_to_messenger", function(e) {
+          console.log("Plug-in reported event: " + e.event);
         });
-        FB.Event.subscribe('messenger_checkbox', function(e) {
+        FB.Event.subscribe("messenger_checkbox", function(e) {
           console.log("messenger_checkbox event");
           console.log(e);
-          if (e.event === 'rendered') {
+          if (e.event === "rendered") {
             console.log("Plugin was rendered");
-          } else if (e.event === 'checkbox') {
+          } else if (e.event === "checkbox") {
             const checkboxState = e.state;
             console.log("Checkbox state: " + checkboxState);
-          } else if (e.event === 'not_you') {
+          } else if (e.event === "not_you") {
             console.log("User clicked 'not you'");
-          } else if (e.event === 'hidden') {
+          } else if (e.event === "hidden") {
             console.log("Plugin was hidden");
           }
         });
         const uuid = uuidv4();
-        for (elem of document.getElementsByClassName('fb-messenger-checkbox')) {
-          elem.setAttribute('user_ref', uuid);
+        for (elem of document.getElementsByClassName("fb-messenger-checkbox")) {
+          elem.setAttribute("user_ref", uuid);
         }
 
-        document.getElementById('opt-in-button').onclick = function () {
-          FB.AppEvents.logEvent('MessengerCheckboxUserConfirmation', null, {
-            'app_id': '394027734355898',
-            'page_id': '145826296128083',
-            'ref': 'DEADBEEF',
-            'user_ref': uuid
+        document.getElementById("opt-in-button").onclick = function () {
+          FB.AppEvents.logEvent("MessengerCheckboxUserConfirmation", null, {
+            "app_id": "394027734355898",
+            "page_id": "145826296128083",
+            "ref": "DEADBEEF",
+            "user_ref": uuid
           });
         }
       };
@@ -63,7 +61,7 @@
         js.id = id;
         js.src = "https://connect.facebook.net/en_US/sdk/debug.js";
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+      }(document, "script", "facebook-jssdk"));
     </script>
     <section>
       <h1>Facebook Messenger - Web Entry Points</h1>
@@ -79,11 +77,11 @@
     </section>
     <h3>Messenger Code (Parametric)</h3>
     <section style="background-color: #fff; color: #2B2B2A;">
-      <img id='messenger-code' style='width:400px; height:400px;' src='/messenger_code?referrer=DEADBEEF'/>
+      <img id="messenger-code" style="width:400px; height:400px;" src="/messenger_code?referrer=DEADBEEF"/>
     </section>
     <h3>http://m.me/ link</h3>
     <section style="background-color: #fff; color: #2B2B2A;">
-      <a href='http://m.me/channelsdemo?ref=DEADBEEF'>Click here to message us!</a>
+      <a href="http://m.me/channelsdemo?ref=DEADBEEF">Click here to message us!</a>
     </section>
     <h3>Checkbox Plugin</h3>
     <section style="background-color: #fff; color: #2B2B2A;">
@@ -99,7 +97,7 @@
         style="display: block"
         >
       </div>
-      <input id='opt-in-button' type="button" value="Confirm Opt-in"/>
+      <input id="opt-in-button" type="button" value="Confirm Opt-in"/>
     </section>
 
     <p>More options using ads and inside facebook applications <a href="https://developers.facebook.com/docs/messenger-platform/introduction/entry-points">here</a>
